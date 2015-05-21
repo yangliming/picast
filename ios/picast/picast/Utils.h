@@ -11,6 +11,12 @@
 
 #import "AppDelegate.h"
 
+static void someFunction() {
+    int x = 3;
+    x++;
+}
+
+
 static void Alert(NSString* message) {
     
     UIViewController* view = [AppDelegate getTopController];
