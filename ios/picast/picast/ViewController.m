@@ -38,6 +38,10 @@
     [dataSource addObject: @"Item 9"];
 }
 
+- (IBAction)popupButton:(id)sender {
+    Alert(@"this is our button");
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -52,19 +52,30 @@
                                     <action selector="addLabelClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="t1t-7H-ekf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeK-jF-vSp">
+                                <rect key="frame" x="277" y="23" width="46" height="30"/>
+                                <state key="normal" title="Popup">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="popupButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y1D-Ik-Hwm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="centerX" secondItem="Zx1-PV-Bmh" secondAttribute="centerX" id="Cms-SH-DBA"/>
-                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Kev-ZW-rv9"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OOa-Ab-5Re"/>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="baseline" secondItem="yJA-0t-Yuf" secondAttribute="baseline" id="VNR-vu-cw8"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Xdf-ip-ZKy" secondAttribute="bottom" constant="8" symbolic="YES" id="Vil-O2-lpW"/>
-                            <constraint firstAttribute="trailing" secondItem="Zx1-PV-Bmh" secondAttribute="trailing" id="d4I-Bj-1mj"/>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="41" id="kvl-Pz-0Vz"/>
-                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="l0V-QH-mGJ"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="mpn-Tp-Uov"/>
-                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="baseline" secondItem="Xdf-ip-ZKy" secondAttribute="baseline" id="wHW-og-tKb"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="0UE-6C-wyc"/>
+                            <constraint firstItem="PeK-jF-vSp" firstAttribute="centerX" secondItem="Xdf-ip-ZKy" secondAttribute="centerX" id="3cF-6Q-fJ6"/>
+                            <constraint firstItem="PeK-jF-vSp" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="3" id="7kO-Yy-oLa"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Q2w-XY-HR5" secondAttribute="bottom" constant="8" symbolic="YES" id="AXg-kg-MgI"/>
+                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Dss-Bb-4XR"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EOx-xL-CEz"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="top" secondItem="PeK-jF-vSp" secondAttribute="bottom" constant="8" symbolic="YES" id="GiE-LW-ZJM"/>
+                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="baseline" secondItem="Xdf-ip-ZKy" secondAttribute="baseline" id="SH6-dl-BNT"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="baseline" secondItem="yJA-0t-Yuf" secondAttribute="baseline" id="W08-NL-3HB"/>
+                            <constraint firstAttribute="trailing" secondItem="Zx1-PV-Bmh" secondAttribute="trailing" id="gOC-Ac-bef"/>
+                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="hvp-Wl-LT3"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="centerX" secondItem="Xdf-ip-ZKy" secondAttribute="centerX" id="pLS-5t-rmm"/>
                         </constraints>
                     </view>
                     <connections>
