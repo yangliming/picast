@@ -85,6 +85,15 @@ http.createServer(function (req, res) {
         res.end();
         return;
     }
+    else if(uri == "/stream") {
+        var url_parts = url.parse(req.url, true);
+        var query = url_parts.query;
+        ffmpeg.createHLS(query['i']);
+
+        console.log(JSON.stringify(query));
+        res.writeHead(200);
+        res.end();
+    }
     else {
         var filename = __dirname + "/stream/" + uri;
         fs.exists(filename, function (exists) {
@@ -130,6 +139,8 @@ http.createServer(function (req, res) {
         });
     }
 }).listen(PORT);
+
+
 
 
 var dgram = require('dgram'); 
