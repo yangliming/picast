@@ -14,9 +14,10 @@
 @interface NetworkRunner : NSObject
 
 + (void)initConnection:(NSString*)connectURL; // should be of the form x.x.x.x:port
-+ (void)loadVideos:(NSMutableArray*)data TableView:(UITableView*)tableViewRef;
++ (void)loadVideoList:(NSMutableArray*)data TableView:(UITableView*)tableViewRef;
 + (void)selectVideo:(NSString*)videoURL;
 + (void)playVideo;
++ (void)setStream;
 + (void)setupListener:(int)port;
 + (void)broadcast;
 

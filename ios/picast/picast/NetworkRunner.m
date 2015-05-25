@@ -20,7 +20,7 @@ CFSocketRef _serverSocket;
 
 void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info) {
     
-    Alert(@"I've received some data!");
+    // Alert(@"I've received some data!");
 
     int                     sock;
     struct sockaddr_storage addr;
@@ -63,13 +63,17 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
         return;
     }
 
+    struct sockaddr_in* newAddr = (struct sockaddr_in*)&addr;
+    char* myAddr = inet_ntoa(newAddr->sin_addr);
+    
     NSString* newStr = [[NSString alloc] initWithData:dataObj encoding:NSUTF8StringEncoding];
-
+    
     // maybe we need to parse string here?
     // not sure of the format the data will be sent in???
     // do something with newStr
 
-    NSString* netAddr = [newStr substringFromIndex: 3]; // 192.168.0.1:8080
+    NSString* netAddr = [NSString stringWithUTF8String:myAddr]; // 192.168.0.1:8080
+    netAddr = [netAddr stringByAppendingString:@":8000"];
     
     // Maybe we want to make a call to init connection here!
     [NetworkRunner initConnection: netAddr];
@@ -131,7 +135,7 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     memset(&addr, 0, sizeof(struct sockaddr_in));
     addr.sin_len = sizeof(struct sockaddr_in);
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(12345);
+    addr.sin_port = htons(1234);
     addr.sin_addr.s_addr = inet_addr("255.255.255.255");
     
     CFDataRef portData = CFDataCreate(kCFAllocatorDefault,
@@ -232,8 +236,12 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     [_desktopSocket makeRequest: @"play"];
 }
 
-+ (void)loadVideos:(NSMutableArray *)data TableView:(id)tableViewRef {
-    [_desktopSocket makeRequest: @"loadVideos" data:data TableView:tableViewRef];
++ (void)setStream {
+    [_desktopSocket makeRequest:@"stream?i=%2Fhome%2Ftom%2FDownloads%2FEx.Machina.2015.DVDRip.XviD.AC3-EVO%2FEx.Machina.2015.DVDRip.XviD.AC3-EVO.avi"];
+}
+
++ (void)loadVideoList:(NSMutableArray *)data TableView:(id)tableViewRef {
+    [_desktopSocket makeRequest: @"list" data:data TableView:tableViewRef];
 }
 
 @end

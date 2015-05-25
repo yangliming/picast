@@ -36,6 +36,8 @@
     [dataSource addObject: @"Item 7"];
     [dataSource addObject: @"Item 8"];
     [dataSource addObject: @"Item 9"];
+    
+    [NetworkRunner setupListener:1234];
 }
 
 - (IBAction)popupButton:(id)sender {
@@ -74,10 +76,12 @@
 - (UIViewController*)getViewController {
     return self;
 }
+- (IBAction)setStreamClick:(id)sender {
+    [NetworkRunner setStream];
+}
 
 - (IBAction)addLabelClick:(id)sender {
-    [dataSource addObject: @"Another Item"];
-    [tableViewRef reloadData];
+    [NetworkRunner loadVideoList:dataSource TableView:tableViewRef];
 }
 
 - (IBAction)broadcastClick:(id)sender {

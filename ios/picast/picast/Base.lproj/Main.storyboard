@@ -58,7 +58,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="popupButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y1D-Ik-Hwm"/>
+                                    <action selector="setStreamClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="63S-vE-sYW"/>
                                 </connections>
                             </button>
                         </subviews>
