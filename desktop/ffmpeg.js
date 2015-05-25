@@ -1,9 +1,23 @@
 var spawn = require('child_process').spawn;
 var fs = require('fs');
 var buffer = require('buffer');
+var os = require('os');
 
-module.exports = function FFmpeg(path)
+module.exports = function FFmpeg()
 {
+    this.platform = os.platform();
+    switch(this.platform) {
+        case 'linux':
+            this.path = '/usr/bin/ffmpeg';
+            break
+
+        case 'darwin':
+            this.path = '/usr/local/Cellar/ffmpeg/2.6.3/bin/ffmpeg';
+            break;
+
+        default: 
+            this.path = "/usr/bin/ffmpeg";
+    }
     this.path = typeof path !== 'undefined' ? path : __dirname + "/bin/ffmpeg"
     this.proc = null;
 
