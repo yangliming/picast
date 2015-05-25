@@ -75,19 +75,8 @@ PORT = 8000;
 
 http.createServer(function (req, res) {
     var uri = url.parse(req.url).pathname;
-
-    if (uri == '/player.html') {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write('<html><head><title>HLS Player fed by node.js' +
-            '</title></head><body>');
-        // console.log( req.socket.localAddress);
-        res.write('<video src="http://' + req.socket.localAddress +
-            ':' + PORT + '/out.m3u8" controls autoplay></body></html>');
-        res.end();
-        return;
-    }
-
-    var filename = path.join("./", uri);
+    console.log(uri);
+    var filename = __dirname + "/stream/" + uri;
     fs.exists(filename, function (exists) {
         if (!exists) {
             console.log('file not found: ' + filename);
@@ -103,9 +92,10 @@ http.createServer(function (req, res) {
                         res.writeHead(500);
                         res.end();
                     } else if (contents) {
-                        // res.writeHead(200, {'Content-Type': 'application/vnd.apple.mpegurl'});
-                        res.writeHead(200, {'Content-Type': 'application/vnd.apple.mpegurl'});
-                        res.end(contents, 'utf-8');
+                        res.writeHead(200,
+                            {'Content-Type':
+                            'application/vnd.apple.mpegurl'});
+                            res.end(contents, 'utf-8');
                     } else {
                         console.log('emptly playlist');
                         res.writeHead(500);
@@ -129,4 +119,3 @@ http.createServer(function (req, res) {
         }
     });
 }).listen(PORT);
-
