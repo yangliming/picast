@@ -9,9 +9,12 @@
 #ifndef picast_NetworkRunner_h
 #define picast_NetworkRunner_h
 
+#import <UIKit/UIKit.h>
+
 @interface NetworkRunner : NSObject
 
 + (void)initConnection:(NSString*)connectURL; // should be of the form x.x.x.x:port
++ (void)loadVideos:(NSMutableArray*)data TableView:(UITableView*)tableViewRef;
 + (void)selectVideo:(NSString*)videoURL;
 + (void)playVideo;
 + (void)setupListener:(int)port;

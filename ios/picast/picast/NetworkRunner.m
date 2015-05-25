@@ -232,4 +232,8 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     [_desktopSocket makeRequest: @"play"];
 }
 
++ (void)loadVideos:(NSMutableArray *)data TableView:(id)tableViewRef {
+    [_desktopSocket makeRequest: @"loadVideos" data:data TableView:tableViewRef];
+}
+
 @end

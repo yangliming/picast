@@ -10,11 +10,13 @@
 #define picast_NetworkSocket_h
 
 @import Foundation;
+#import <UIKit/UIKit.h>
 
 @interface NetworkSocket : NSObject <NSURLConnectionDelegate>
 
 - (id)initWithURL:(NSString*)url;
 - (void)makeRequest:(NSString*)req;
+- (void)makeRequest:(NSString*)req data:(NSMutableArray*)dataSource TableView:(UITableView*)tableVewRef;
 
 @end
 
