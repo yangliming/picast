@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>1AF7C78DD3CF1C710C89E8F900E5D7D13808EB21</key>
-		<string>https://github.com/tab1293/picast.git</string>
+		<string>https://github.com/yangliming/picast.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ios/picast/picast.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/tab1293/picast.git</string>
+	<string>https://github.com/yangliming/picast.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
