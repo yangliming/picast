@@ -13,13 +13,22 @@
 
 @interface NetworkRunner : NSObject
 
-+ (void)initConnection:(NSString*)connectURL; // should be of the form x.x.x.x:port
-+ (void)loadVideoList:(NSMutableArray*)data TableView:(UITableView*)tableViewRef;
+// Finding Streaming Services
++ (void)broadcast;
++ (void)setupListener:(int)port;
++ (void)loadServerList:(NSMutableArray*)dataSource TableView:(UITableView*)tableViewRef;
+
+
+// Setting Connection
++ (void)setConnection:(NSString*)connectURL; // should be of the form x.x.x.x:port
+
+// Retrieving Data
++ (void)loadVideoList:(NSMutableArray*)data CollectionView:(UICollectionView*)collectionViewRef;
+
+// Controls
 + (void)selectVideo:(NSString*)videoURL;
 + (void)playVideo;
 + (void)setStream;
-+ (void)setupListener:(int)port;
-+ (void)broadcast;
 
 @end
 

@@ -15,8 +15,9 @@
 @interface NetworkSocket : NSObject <NSURLConnectionDelegate>
 
 - (id)initWithURL:(NSString*)url;
-- (void)makeRequest:(NSString*)req;
-- (void)makeRequest:(NSString*)req data:(NSMutableArray*)dataSource TableView:(UITableView*)tableVewRef;
+- (NSURLConnection*)makeGenericRequest:(NSString*)req;
+- (NSURLConnection*)makeRequest:(NSString*)req;
+- (NSURLConnection*)makeRequest:(NSString*)req data:(NSMutableArray*)dataSource CollectionView:(UICollectionView*)tableVewRef;
 
 @end
 

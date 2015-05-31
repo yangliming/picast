@@ -19,6 +19,7 @@ NetworkSocket* _desktopSocket;
 CFSocketRef _serverSocket;
 
 NSMutableArray* _broadcastList;
+UITableView* _tableViewRef;
 
 void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info) {
     
@@ -77,11 +78,10 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
         NSString* netAddr = [NSString stringWithUTF8String:myAddr];
         netAddr = [netAddr stringByAppendingString:@":8000"];
         
-        if (_broadcastList == nil) {
-            _broadcastList = [[NSMutableArray alloc] init];
+        if (_broadcastList != nil && _tableViewRef != nil) {
+            [_broadcastList addObject:netAddr];
+            [_tableViewRef reloadData];
         }
-        
-        [_broadcastList addObject:netAddr];
     }
 }
 
@@ -104,7 +104,7 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
 */
 
 + (void)broadcast {
-    
+        
     // Setup and Create UDP Socket
     const CFSocketContext context = { 0, NULL, NULL, NULL, NULL };
     
@@ -227,7 +227,7 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     CFRelease(rls);
 }
 
-+ (void)initConnection:(NSString*)connectURL {
++ (void)setConnection:(NSString*)connectURL {
     
     // Should probe for available connections here
     
@@ -239,6 +239,12 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     
     _desktopSocket = [[NetworkSocket alloc] initWithURL: lastAddr];
     
+}
+
++ (void)loadServerList:(NSMutableArray *)data TableView:(UITableView *)tableViewRef {
+    _broadcastList = data;
+    _tableViewRef = tableViewRef;
+    [NetworkRunner broadcast];
 }
 
 + (void)selectVideo:(NSString*)videoURL {
@@ -253,8 +259,8 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     [_desktopSocket makeRequest:@"stream?i=%2Fhome%2Ftom%2FDownloads%2FEx.Machina.2015.DVDRip.XviD.AC3-EVO%2FEx.Machina.2015.DVDRip.XviD.AC3-EVO.avi"];
 }
 
-+ (void)loadVideoList:(NSMutableArray *)data TableView:(id)tableViewRef {
-    [_desktopSocket makeRequest: @"list" data:data TableView:tableViewRef];
++ (void)loadVideoList:(NSMutableArray *)data CollectionView:(UICollectionView *)collectionViewRef {
+    [_desktopSocket makeRequest: @"list" data:data CollectionView:collectionViewRef];
 }
 
 @end

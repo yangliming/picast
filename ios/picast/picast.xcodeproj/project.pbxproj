@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F42D102D1B1B8A7B005F1F17 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D102C1B1B8A7B005F1F17 /* CollectionViewController.m */; };
+		F46D4A061B1BBC870093DBFD /* MovieData.m in Sources */ = {isa = PBXBuildFile; fileRef = F46D4A051B1BBC870093DBFD /* MovieData.m */; };
 		F470AADB1B006ECB001BEB87 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470AADA1B006ECB001BEB87 /* AVKit.framework */; };
 		F4978B0B1B02AC02002A8638 /* NetworkSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F4978B0A1B02AC02002A8638 /* NetworkSocket.m */; };
 		F4C927CE1AF2C8DE007E130A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C927CD1AF2C8DE007E130A /* main.m */; };
@@ -33,6 +34,8 @@
 /* Begin PBXFileReference section */
 		F42D102B1B1B8A7B005F1F17 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		F42D102C1B1B8A7B005F1F17 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		F46D4A041B1BBC870093DBFD /* MovieData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieData.h; sourceTree = "<group>"; };
+		F46D4A051B1BBC870093DBFD /* MovieData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieData.m; sourceTree = "<group>"; };
 		F470AADA1B006ECB001BEB87 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		F4978B091B02AB9A002A8638 /* NetworkSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkSocket.h; sourceTree = "<group>"; };
 		F4978B0A1B02AC02002A8638 /* NetworkSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSocket.m; sourceTree = "<group>"; };
@@ -110,6 +113,8 @@
 				F4978B0A1B02AC02002A8638 /* NetworkSocket.m */,
 				F42D102B1B1B8A7B005F1F17 /* CollectionViewController.h */,
 				F42D102C1B1B8A7B005F1F17 /* CollectionViewController.m */,
+				F46D4A041B1BBC870093DBFD /* MovieData.h */,
+				F46D4A051B1BBC870093DBFD /* MovieData.m */,
 			);
 			path = picast;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				F42D102D1B1B8A7B005F1F17 /* CollectionViewController.m in Sources */,
 				F4C927D11AF2C8DE007E130A /* AppDelegate.m in Sources */,
 				F4C9280F1AF43AF1007E130A /* NetworkRunner.m in Sources */,
+				F46D4A061B1BBC870093DBFD /* MovieData.m in Sources */,
 				F4C927CE1AF2C8DE007E130A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

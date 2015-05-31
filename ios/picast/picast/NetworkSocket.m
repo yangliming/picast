@@ -9,12 +9,14 @@
 #import "NetworkSocket.h"
 #import <Foundation/Foundation.h>
 #import "Utils.h"
+#import "MovieData.h"
 
 @implementation NetworkSocket {
     NSMutableArray* _dataSource;
-    UITableView* _tableViewRef;
+    UICollectionView* _collectionViewRef;
     NSMutableData* _responseData;
     NSString* _url;
+    NSMutableDictionary* _imgConn;
 }
 
 - (id)initWithURL:(NSString *)url {
@@ -48,33 +50,68 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSError* error;
-    NSDictionary* metadata = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&error];
 
-    if (_dataSource != nil && _tableViewRef != nil) {
-        [_dataSource addObject: metadata];
-        [_tableViewRef reloadData];
+    if (_imgConn == nil) {
+        _imgConn = [[NSMutableDictionary alloc] init];
     }
     
+    NSString* key = [NSString stringWithFormat:@"%d", (int)connection];
+    NSDictionary* data = [_imgConn objectForKey:key];
+    
+    
+    // When we got a list
+    if (data == nil && [_responseData length] != 0) {
+        NSError* error;
+        NSDictionary* data = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&error];
+        
+        NSString* dKey = [data allKeys][0];
+        int conn = (int)[self makeGenericRequest:data[dKey][@"Poster"]];
+        
+        NSString* newKey = [NSString stringWithFormat:@"%d", conn];
+        [_imgConn setObject:data forKey:newKey];
+    }
+    // When we got an image
+    else {
+        if (_dataSource != nil) {
+            
+            UIImage* image = [[UIImage alloc] initWithData:_responseData];
+            MovieData* md = [[MovieData alloc] initWithDictionary:data Image:image];
+            [_dataSource addObject: md];
+        }
+        
+        if (_collectionViewRef != nil) {
+            [_collectionViewRef reloadData];
+        }
+        
+        [_imgConn removeObjectForKey:key];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     Alert(@"Connection Error");
 }
 
-- (void)makeRequest:(NSString *)req {
-    NSString* url = [NSString stringWithFormat: @"http://%@/%@", _url, req];
+
+- (NSURLConnection*)makeGenericRequest:(NSString *)req {
+    NSString* url = req;
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
-    NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate: self];
+    return [[NSURLConnection alloc] initWithRequest:request delegate: self];
 }
 
-- (void)makeRequest:(NSString *)req data:(NSMutableArray*)dataSource TableView:(UITableView*)tableVewRef{
+- (NSURLConnection*)makeRequest:(NSString *)req {
     NSString* url = [NSString stringWithFormat: @"http://%@/%@", _url, req];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
-    NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate: self];
+    return [[NSURLConnection alloc] initWithRequest:request delegate: self];
+}
+
+- (NSURLConnection*)makeRequest:(NSString *)req data:(NSMutableArray*)dataSource CollectionView:(UICollectionView *)collectionViewRef{
     
     _dataSource = dataSource;
-    _tableViewRef = tableVewRef;
+    _collectionViewRef = collectionViewRef;
+    
+    NSString* url = [NSString stringWithFormat: @"http://%@/%@", _url, req];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString: url]];
+    return [[NSURLConnection alloc] initWithRequest:request delegate: self];
 }
 
 @end
