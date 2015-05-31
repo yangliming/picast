@@ -3,55 +3,188 @@
     <title>Picast</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-fix.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
     <script id="videoTemplate" type="text/x-handlebars-template">
-        <img id="{{path}}" class="poster" {{#if Poster}} src="{{Poster}}" {{else}} src="./img/no-poster.jpg" {{/if}}></img>
+        <img id="{{path}}" class="poster" {{#if Poster}} src="{{Poster}}" {{else}}
+            src="./img/no-poster.jpg" {{/if}}></img>
     </script>
+
+    <script id="seriesTemplate" type="text/x-handlebars-template">
+        <img id="{{path}}" class="series" {{#if banner}} src="{{banner}}" {{else}} src="./img/no-poster.jpg" {{/if}}></img>
+    </script>
+
+    <script id="episodeTemplate" type="text/x-handlebars-template">
+        <img id="{{path}}" class="episode" {{#if Poster}} src="{{Poster}}" {{else}} src="./img/no-poster.jpg" {{/if}}></img>
+    </script>
+
     <script type="text/javascript">
         var remote = require('remote');
+        var webContents = remote.getCurrentWindow();
         var ipc = require('ipc');
         var Masonry = require('masonry-layout')
         var masonry;
-        ipc.send('getVideos');
+
+        ipc.send('getPi');
+
+        ipc.on('piHostname', function(hostname) {
+            if(hostname) {
+                $('#pi-status').removeClass('label-danger').addClass('label-success').text(hostname + " connected");
+            }
+        });
+
+        ipc.on('piDisconnect', function() {
+            $('#pi-status').removeClass('label-success').addClass('label-danger').text("Raspberry pi not connected");
+        });
 
 
-        ipc.on('videos', function(videos) {
+        ipc.on('videos', function(videos, seriesManager) {
             console.log(JSON.stringify(videos));
             for(path in videos) {
                 videoInfo = videos[path];
                 videoInfo['path'] = path;
-                var template = $('#videoTemplate').html();
-                var video = Handlebars.compile(template);
-                $('#container').append(video(videoInfo));
-                var container = document.querySelector('#container');
-                var masonry = new Masonry( container, {
-                  itemSelector: '.poster',
-                  gutter: 20,
+                if(videoInfo['type'] == "movie" || videoInfo['type'] == "other") {
+                    var tabId = "";
+                    if (videoInfo['type'] == "movie")
+                        tabId = '#videos';
+                    else
+                        tabId = '#other-videos';
+
+                    var template = $('#videoTemplate').html();
+                    var video = Handlebars.compile(template);
+                    $(tabId).append(video(videoInfo));
+                    var videoContainer = document.querySelector(tabId);
+                    var masonry = new Masonry( videoContainer, {
+                      itemSelector: '.poster',
+                      gutter: 20,
+                    });
+                    masonry.layout();
+                }
+            }
+
+            $('#tv-shows').empty();
+            for(key in seriesManager) {
+                var series = seriesManager[key];
+                var template = $('#seriesTemplate').html();
+                var seriesBanner = Handlebars.compile(template);
+                $('#tv-shows').append(seriesBanner(series));
+                var seriesContainer = document.querySelector('#tv-shows');
+                var masonry = new Masonry( seriesContainer, {
+                    itemSelector: '.series',
+                    gutter: 20,
                 });
                 masonry.layout();
             }
         });
 
+        ipc.on('watchingFolder', function(folderPath) {
+            console.log("\n*** Recieved "+"[' "+folderPath+" ']\n");
+            // CONFIRM :)
+        });
+
         $(function() {
             $(document).on('click', '.poster', function() {
                 var videoPath = $(this).attr('id');
-                ipc.send('stream', videoPath);
+                ipc.send('getMovieInfo', videoPath);
             });
-        })
 
+            $(document).on('click', '.series', function() {
+                var seriesPath = $(this).attr('id');
+                ipc.send('getSeriesInfo', seriesPath);
+            })
+
+            $(document).on('click', '#watchFolder', function() {
+                    ipc.send('folderDialog');
+            });
+
+            $(document).on('click', '#pi-stream', function() {
+                ipc.send('startStream', $(this).data('path'));
+                $('#play-pause').removeClass('fa-play').addClass('fa-pause');
+            });
+
+            $(document).on('click', '.fa-pause', function() {
+                ipc.send('playPauseStream', $(this).data('path'));
+                $('#play-pause').removeClass('fa-pause').addClass('fa-play');
+            });
+
+            $(document).on('click', '.fa-play', function() {
+                ipc.send('playPauseStream', $(this).data('path'));
+                $('#play-pause').removeClass('fa-play').addClass('fa-pause');
+            });
+
+            // $('.poster').popover({trigger:'hover'});
+            $('#myTab a:first').tab('show')
+        });
 
     </script>
-    
+
 </head>
 <body>
-    <h4>Picast</h4>
     <div style="margin:20px">
-    <div id="container">
+        <div id="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <h3 id="logo">Picast</h3>
+            </div>
+            <div class="col-lg-2">
+                <span id="pi-status" class="label label-danger pull-right">Raspberry pi not connected</span>
+            </div>
+        </div>
+            <!-- Navigation Tabs -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="tabs">
+                        <ul class="nav nav-tabs" role="tablist" id="myTab">
+                            <li role="presentation" class="active"><a href="#movies" aria-controls="movies" role="tab" data-toggle="tab">Movies</a></li>
+                            <li role="presentation"><a href="#tv" aria-controls="tv" role="tab" data-toggle="tab">TV</a></li>
+                            <li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab content -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="movies">
+                    <!-- Videos -->
+                    <div id="videos"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tv">
+                    <!-- TV shows -->
+                    <div id="tv-shows"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="other">
+                    <!-- Other videos -->
+                    <div id="other-videos"></div>
+                </div>
+            </div>
+            <!-- Add Folder button -->
+        <div class>
+            <button style="margin-bottom:10px" id="watchFolder" class="btn btn-success stream-btn pull-left">+ Folder</button>
+        </div>
+        </div>
     </div>
-    </div>
+
+    <div id="movie-info" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 id="movie-title"></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="pi-stream" type="button" class="btn btn-primary">Stream to Pi</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </body>
 </html>
 
