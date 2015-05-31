@@ -31,6 +31,9 @@
     // we can use httpResp to see the status code, and any headers
     NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*)response;
     
+    if (httpResp.statusCode >= 400) {
+        Alert([NSString stringWithFormat:@"Error: %li", (long)httpResp.statusCode]);
+    }
 }
 
 // this function will be called after every block of data is sent, this is why we append the
@@ -45,13 +48,11 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // we want to serialize the data into a JSON object
     NSError* error;
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&error];
-    
-    // well, need to know what the server is sending before we can actually compose anything :[
+    NSDictionary* metadata = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&error];
+
     if (_dataSource != nil && _tableViewRef != nil) {
-        [_dataSource addObject: @"Yay I added an object to mah data!"];
+        [_dataSource addObject: metadata];
         [_tableViewRef reloadData];
     }
     

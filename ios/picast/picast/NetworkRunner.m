@@ -18,10 +18,10 @@
 NetworkSocket* _desktopSocket;
 CFSocketRef _serverSocket;
 
+NSMutableArray* _broadcastList;
+
 void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info) {
     
-    // Alert(@"I've received some data!");
-
     int                     sock;
     struct sockaddr_storage addr;
     socklen_t               addrLen;
@@ -71,12 +71,18 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     // maybe we need to parse string here?
     // not sure of the format the data will be sent in???
     // do something with newStr
-
-    NSString* netAddr = [NSString stringWithUTF8String:myAddr]; // 192.168.0.1:8080
-    netAddr = [netAddr stringByAppendingString:@":8000"];
     
-    // Maybe we want to make a call to init connection here!
-    [NetworkRunner initConnection: netAddr];
+    if ([newStr compare:@"hello"]) {
+
+        NSString* netAddr = [NSString stringWithUTF8String:myAddr];
+        netAddr = [netAddr stringByAppendingString:@":8000"];
+        
+        if (_broadcastList == nil) {
+            _broadcastList = [[NSMutableArray alloc] init];
+        }
+        
+        [_broadcastList addObject:netAddr];
+    }
 }
 
 @implementation NetworkRunner
@@ -224,7 +230,14 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
 + (void)initConnection:(NSString*)connectURL {
     
     // Should probe for available connections here
-    _desktopSocket = [[NetworkSocket alloc] initWithURL: connectURL];
+    
+    NSString* lastAddr = [_broadcastList lastObject];
+    
+    if (lastAddr == nil) {
+        lastAddr = @"localhost:8000";
+    }
+    
+    _desktopSocket = [[NetworkSocket alloc] initWithURL: lastAddr];
     
 }
 

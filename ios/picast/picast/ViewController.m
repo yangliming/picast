@@ -8,6 +8,7 @@
 @import AVKit;
 @import AVFoundation;
 #import "ViewController.h"
+#import "CollectionViewController.h"
 #import "NetworkRunner.h"
 #import "Utils.h"
 
@@ -18,6 +19,7 @@
 @implementation ViewController {
     NSMutableArray* dataSource;
     __weak IBOutlet UITableView *tableViewRef;
+    __weak IBOutlet UIButton *testVideo;
 }
 
 - (void)viewDidLoad {
@@ -40,19 +42,18 @@
     [NetworkRunner setupListener:1234];
 }
 
-- (IBAction)popupButton:(id)sender {
-    Alert(@"this is our button");
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
-    NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.43.236:8000/out.m3u8"];
-    destination.player = [[AVPlayer alloc] initWithURL: url];
+    
+    if (sender == testVideo) {
+        AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
+        NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.43.236:8000/out.m3u8"];
+        destination.player = [[AVPlayer alloc] initWithURL: url];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -62,7 +63,7 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         
     NSString* string = [NSString stringWithFormat: @"Selected Row: %lu", (unsigned long)[indexPath indexAtPosition: 1]];
-    Alert(string);
+    // Alert(string);
     
     return indexPath;
 }
@@ -73,19 +74,33 @@
     return cell;
 }
 
-- (UIViewController*)getViewController {
-    return self;
-}
-- (IBAction)setStreamClick:(id)sender {
-    [NetworkRunner setStream];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];    
+    CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
+    [self presentViewController:cvc animated:YES completion:nil];
 }
 
-- (IBAction)addLabelClick:(id)sender {
-    [NetworkRunner loadVideoList:dataSource TableView:tableViewRef];
+- (UIViewController*)getViewController {
+    return self;
 }
 
 - (IBAction)broadcastClick:(id)sender {
     [NetworkRunner broadcast];
 }
+
+- (IBAction)connectClick:(id)sender {
+    [NetworkRunner initConnection:nil];
+}
+
+- (IBAction)loadListClick:(id)sender {
+    [NetworkRunner loadVideoList:dataSource TableView:tableViewRef];
+}
+
+- (IBAction)setStreamClick:(id)sender {
+    [NetworkRunner setStream];
+}
+
+
 
 @end

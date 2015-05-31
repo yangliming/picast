@@ -12,13 +12,12 @@ module.exports = function FFmpeg()
             break
 
         case 'darwin':
-            this.path = '/usr/local/Cellar/ffmpeg/2.6.3/bin/ffmpeg';
+            this.path = '/usr/local/Cellar/ffmpeg/2.6.1/bin/ffmpeg';
             break;
 
         default: 
             this.path = "/usr/bin/ffmpeg";
     }
-    this.path = typeof path !== 'undefined' ? path : __dirname + "/bin/ffmpeg"
     this.proc = null;
 
 

@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xdf-ip-ZKy">
-                                <rect key="frame" x="249" y="61" width="103" height="30"/>
-                                <state key="normal" title="Test Broadcast">
+                                <rect key="frame" x="16" y="20" width="71" height="30"/>
+                                <state key="normal" title="Broadcast">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -27,59 +27,71 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zx1-PV-Bmh">
-                                <rect key="frame" x="0.0" y="99" width="600" height="501"/>
+                                <rect key="frame" x="0.0" y="58" width="600" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="Dig-Jo-cjc"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="Hvc-Hb-HAH"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-0t-Yuf">
-                                <rect key="frame" x="513" y="61" width="71" height="30"/>
-                                <state key="normal" title="Test Video">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="YXj-mu-FCm" kind="show" id="IGT-et-GWK"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2w-XY-HR5">
-                                <rect key="frame" x="16" y="61" width="70" height="30"/>
-                                <state key="normal" title="Add Label">
+                                <rect key="frame" x="162" y="20" width="54" height="30"/>
+                                <state key="normal" title="Get List">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addLabelClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="t1t-7H-ekf"/>
+                                    <action selector="loadListClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PcC-a7-Yyi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeK-jF-vSp">
-                                <rect key="frame" x="277" y="23" width="46" height="30"/>
-                                <state key="normal" title="Popup">
+                                <rect key="frame" x="224" y="20" width="49" height="30"/>
+                                <state key="normal" title="Stream">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="setStreamClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="63S-vE-sYW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2g-Dc-pIT">
+                                <rect key="frame" x="95" y="20" width="59" height="30"/>
+                                <state key="normal" title="Connect">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ia7-BI-dcn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-0t-Yuf">
+                                <rect key="frame" x="281" y="20" width="39" height="30"/>
+                                <state key="normal" title="Video">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="YXj-mu-FCm" kind="show" id="IGT-et-GWK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="0UE-6C-wyc"/>
-                            <constraint firstItem="PeK-jF-vSp" firstAttribute="centerX" secondItem="Xdf-ip-ZKy" secondAttribute="centerX" id="3cF-6Q-fJ6"/>
-                            <constraint firstItem="PeK-jF-vSp" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="3" id="7kO-Yy-oLa"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Q2w-XY-HR5" secondAttribute="bottom" constant="8" symbolic="YES" id="AXg-kg-MgI"/>
-                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Dss-Bb-4XR"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EOx-xL-CEz"/>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="top" secondItem="PeK-jF-vSp" secondAttribute="bottom" constant="8" symbolic="YES" id="GiE-LW-ZJM"/>
-                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="baseline" secondItem="Xdf-ip-ZKy" secondAttribute="baseline" id="SH6-dl-BNT"/>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="baseline" secondItem="yJA-0t-Yuf" secondAttribute="baseline" id="W08-NL-3HB"/>
-                            <constraint firstAttribute="trailing" secondItem="Zx1-PV-Bmh" secondAttribute="trailing" id="gOC-Ac-bef"/>
-                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="hvp-Wl-LT3"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="centerX" secondItem="Xdf-ip-ZKy" secondAttribute="centerX" id="pLS-5t-rmm"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Zx1-PV-Bmh" secondAttribute="bottom" constant="46" id="41n-3x-C9y"/>
+                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="leading" secondItem="e2g-Dc-pIT" secondAttribute="trailing" constant="8" symbolic="YES" id="4xP-Pm-SjU"/>
+                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="baseline" secondItem="PeK-jF-vSp" secondAttribute="baseline" id="8TG-0g-Wez"/>
+                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="baseline" secondItem="e2g-Dc-pIT" secondAttribute="baseline" id="B0k-9E-caB"/>
+                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="baseline" secondItem="PeK-jF-vSp" secondAttribute="baseline" id="Dsq-Lj-OVT"/>
+                            <constraint firstItem="PeK-jF-vSp" firstAttribute="leading" secondItem="Q2w-XY-HR5" secondAttribute="trailing" constant="8" symbolic="YES" id="H6Q-I3-tg2"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Xdf-ip-ZKy" secondAttribute="bottom" constant="8" symbolic="YES" id="I4z-g6-xq1"/>
+                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="NTV-Qn-4A2"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="centerX" secondItem="yJA-0t-Yuf" secondAttribute="centerX" id="Ptr-PQ-auy"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dbB-DW-JNS"/>
+                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="leading" secondItem="PeK-jF-vSp" secondAttribute="trailing" constant="8" symbolic="YES" id="dqo-aZ-7YB"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="kll-C9-uoS"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="baseline" secondItem="e2g-Dc-pIT" secondAttribute="baseline" id="lGq-mK-kic"/>
+                            <constraint firstItem="e2g-Dc-pIT" firstAttribute="leading" secondItem="Xdf-ip-ZKy" secondAttribute="trailing" constant="8" symbolic="YES" id="wwb-wP-qXY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableViewRef" destination="Zx1-PV-Bmh" id="PEi-Xq-8S9"/>
+                        <outlet property="testVideo" destination="yJA-0t-Yuf" id="DDT-qw-pbi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
