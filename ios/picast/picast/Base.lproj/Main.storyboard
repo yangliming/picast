@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,85 +20,53 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xdf-ip-ZKy">
-                                <rect key="frame" x="16" y="20" width="71" height="30"/>
-                                <state key="normal" title="Broadcast">
+                                <rect key="frame" x="531" y="20" width="53" height="30"/>
+                                <state key="normal" title="Refresh">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="broadcastClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="RL8-9F-0Ls"/>
+                                    <action selector="refreshClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Fs8-4p-JSN"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zx1-PV-Bmh">
-                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
+                                <rect key="frame" x="0.0" y="58" width="584" height="528"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="Dig-Jo-cjc"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="Hvc-Hb-HAH"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2w-XY-HR5">
-                                <rect key="frame" x="162" y="20" width="54" height="30"/>
-                                <state key="normal" title="Get List">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loadListClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PcC-a7-Yyi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PeK-jF-vSp">
-                                <rect key="frame" x="224" y="20" width="49" height="30"/>
-                                <state key="normal" title="Stream">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="setStreamClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="63S-vE-sYW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2g-Dc-pIT">
-                                <rect key="frame" x="95" y="20" width="59" height="30"/>
-                                <state key="normal" title="Connect">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="connectClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ia7-BI-dcn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-0t-Yuf">
-                                <rect key="frame" x="281" y="20" width="39" height="30"/>
-                                <state key="normal" title="Video">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="YXj-mu-FCm" kind="show" id="IGT-et-GWK"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Player" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRQ-iv-auQ">
+                                <rect key="frame" x="243" y="24" width="115" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="dC7-El-Zv5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="5de-mJ-SDc"/>
-                            <constraint firstItem="Q2w-XY-HR5" firstAttribute="leading" secondItem="e2g-Dc-pIT" secondAttribute="trailing" constant="8" symbolic="YES" id="DT6-or-032"/>
-                            <constraint firstItem="e2g-Dc-pIT" firstAttribute="leading" secondItem="Xdf-ip-ZKy" secondAttribute="trailing" constant="8" symbolic="YES" id="EBL-mL-FCu"/>
-                            <constraint firstItem="PeK-jF-vSp" firstAttribute="baseline" secondItem="Q2w-XY-HR5" secondAttribute="baseline" id="JGk-8V-N6Y"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="KDM-Ps-LXl"/>
-                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="KHd-tb-ahK"/>
-                            <constraint firstItem="PeK-jF-vSp" firstAttribute="leading" secondItem="Q2w-XY-HR5" secondAttribute="trailing" constant="8" symbolic="YES" id="UQD-hV-bdQ"/>
-                            <constraint firstItem="e2g-Dc-pIT" firstAttribute="baseline" secondItem="Xdf-ip-ZKy" secondAttribute="baseline" id="VTO-Ld-3pw"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Xdf-ip-ZKy" secondAttribute="bottom" constant="8" symbolic="YES" id="Zs3-Vc-CFZ"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="bR6-MV-EIC"/>
-                            <constraint firstItem="e2g-Dc-pIT" firstAttribute="baseline" secondItem="Q2w-XY-HR5" secondAttribute="baseline" id="ekP-sI-5nf"/>
-                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="centerX" secondItem="yJA-0t-Yuf" secondAttribute="centerX" id="f3D-PJ-o8e"/>
-                            <constraint firstItem="PeK-jF-vSp" firstAttribute="baseline" secondItem="yJA-0t-Yuf" secondAttribute="baseline" id="hTt-93-N7v"/>
-                            <constraint firstItem="yJA-0t-Yuf" firstAttribute="leading" secondItem="PeK-jF-vSp" secondAttribute="trailing" constant="8" symbolic="YES" id="tNi-N9-dVG"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Zx1-PV-Bmh" secondAttribute="bottom" constant="14" id="E8Z-i1-FdN"/>
+                            <constraint firstItem="hRQ-iv-auQ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="4" id="F8D-Pv-HLn"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="top" secondItem="Xdf-ip-ZKy" secondAttribute="bottom" constant="8" symbolic="YES" id="QmN-Bm-ViE"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="R14-a5-UFE"/>
+                            <constraint firstItem="hRQ-iv-auQ" firstAttribute="baseline" secondItem="Xdf-ip-ZKy" secondAttribute="firstBaseline" id="Zqt-CG-Ykq"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="baseline" secondItem="hRQ-iv-auQ" secondAttribute="baseline" id="aW5-HO-xJd"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ai8-Xp-QoQ"/>
+                            <constraint firstItem="Zx1-PV-Bmh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="gQ7-dh-C6k"/>
+                            <constraint firstItem="hRQ-iv-auQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="jH6-6I-3bo"/>
+                            <constraint firstItem="Xdf-ip-ZKy" firstAttribute="trailing" secondItem="Zx1-PV-Bmh" secondAttribute="trailing" id="zHH-ee-cLd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableViewRef" destination="Zx1-PV-Bmh" id="PEi-Xq-8S9"/>
-                        <outlet property="testVideo" destination="yJA-0t-Yuf" id="DDT-qw-pbi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="561" y="401"/>
+            <point key="canvasLocation" x="541" y="401"/>
         </scene>
         <!--AV Player View Controller-->
         <scene sceneID="mRe-nZ-Sq9">

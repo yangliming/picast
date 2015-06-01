@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication sharedApplication].keyWindow.rootViewController = self;
+    
     //UIFont * customFont = [UIFont fontWithName:ProximaNovaSemibold size:12]; //custom font
     NSString * text = @"Your Movies";
     

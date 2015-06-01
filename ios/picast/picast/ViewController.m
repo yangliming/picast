@@ -20,7 +20,6 @@
 @implementation ViewController {
     NSMutableArray* dataSource;
     __weak IBOutlet UITableView *tableViewRef;
-    __weak IBOutlet UIButton *testVideo;
 }
 
 - (void)viewDidLoad {
@@ -30,21 +29,15 @@
     
     dataSource = [[NSMutableArray alloc] init];
     
+    //NSArray* db = [[NSArray alloc] initWithObjects: @"localhost", @"192.168.137.221:8000", nil];
+    //[dataSource addObject:db];
+    
     [NetworkRunner setupListener:1234];
     [NetworkRunner loadServerList:dataSource TableView:tableViewRef];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if (sender == testVideo) {
-        AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.137.156:8000/out.m3u8"];
-        destination.player = [[AVPlayer alloc] initWithURL: url];
-    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -71,22 +64,34 @@
     return self;
 }
 
-- (IBAction)broadcastClick:(id)sender {
-    [NetworkRunner broadcast];
-}
-
-- (IBAction)connectClick:(id)sender {
-    [NetworkRunner setConnection:nil];
-}
-
-- (IBAction)loadListClick:(id)sender {
-    [NetworkRunner loadVideoList:dataSource CollectionView:nil];
-}
-
-- (IBAction)setStreamClick:(id)sender {
-    [NetworkRunner setStream];
+- (IBAction)refreshClick:(id)sender {
+    [dataSource removeAllObjects];
+    [NetworkRunner loadServerList:dataSource TableView:tableViewRef];
 }
 
 
+/*
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ 
+ if (sender == testVideo) {
+ AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
+ NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.137.156:8000/out.m3u8"];
+ destination.player = [[AVPlayer alloc] initWithURL: url];
+ }
+ }
+ 
+ - (IBAction)connectClick:(id)sender {
+ [NetworkRunner setConnection:nil];
+ }
+ 
+ - (IBAction)loadListClick:(id)sender {
+ [NetworkRunner loadVideoList:dataSource CollectionView:nil];
+ }
+ 
+ - (IBAction)setStreamClick:(id)sender {
+ [NetworkRunner setStream];
+ }
+
+ */
 
 @end

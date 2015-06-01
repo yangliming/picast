@@ -64,11 +64,11 @@
         NSError* error;
         NSDictionary* data = [NSJSONSerialization JSONObjectWithData:_responseData options:kNilOptions error:&error];
         
-        NSString* dKey = [data allKeys][0];
-        int conn = (int)[self makeGenericRequest:data[dKey][@"Poster"]];
-        
-        NSString* newKey = [NSString stringWithFormat:@"%d", conn];
-        [_imgConn setObject:data forKey:newKey];
+        for (NSString* dKey in [data allKeys]) {
+            int conn = (int)[self makeGenericRequest:data[dKey][@"Poster"]];
+            NSString* newKey = [NSString stringWithFormat:@"%d", conn];
+            [_imgConn setObject:data forKey:newKey];
+        }
     }
     // When we got an image
     else {

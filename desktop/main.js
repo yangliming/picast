@@ -286,7 +286,7 @@ server.on("message", function(msg, rinfo) {
     msg_str = msg.toString();
     msg_str = msg_str.replace(/\0/g, '');
 
-    if(msg_str === "iphone") {
+    if(true) {
         var response = os.hostname();
         server.send(response, 0, response.length, 1234, rinfo.address);
     }
