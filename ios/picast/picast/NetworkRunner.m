@@ -67,19 +67,25 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     struct sockaddr_in* newAddr = (struct sockaddr_in*)&addr;
     char* myAddr = inet_ntoa(newAddr->sin_addr);
     
-    NSString* newStr = [[NSString alloc] initWithData:dataObj encoding:NSUTF8StringEncoding];
+    NSString* compName = [[NSString alloc] initWithData:dataObj encoding:NSUTF8StringEncoding];
     
     // maybe we need to parse string here?
     // not sure of the format the data will be sent in???
     // do something with newStr
     
-    if ([newStr compare:@"hello"]) {
+    const char* str = [compName cStringUsingEncoding:NSASCIIStringEncoding];
+    int value = strcmp(str, "iphone");
+    
+    
+    if (value != 0) {
 
         NSString* netAddr = [NSString stringWithUTF8String:myAddr];
         netAddr = [netAddr stringByAppendingString:@":8000"];
         
         if (_broadcastList != nil && _tableViewRef != nil) {
-            [_broadcastList addObject:netAddr];
+            
+            NSArray* arr = [[NSArray alloc] initWithObjects: compName, netAddr];
+            [_broadcastList addObject:arr];
             [_tableViewRef reloadData];
         }
     }
@@ -154,7 +160,7 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
     }
 
     // Data we intend to send
-    char buffer[] = "myIP:4000";
+    char buffer[] = "iphone";
     CFDataRef sendData = CFDataCreate(kCFAllocatorDefault,
                                       (UInt8*)(&buffer),
                                       sizeof(buffer));
@@ -228,12 +234,10 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
 }
 
 + (void)setConnection:(NSString*)connectURL {
+
+    NSString* lastAddr = connectURL;
     
-    // Should probe for available connections here
-    
-    NSString* lastAddr = [_broadcastList lastObject];
-    
-    if (lastAddr == nil) {
+    if (connectURL == nil) {
         lastAddr = @"localhost:8000";
     }
     
@@ -261,6 +265,20 @@ void readCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, c
 
 + (void)loadVideoList:(NSMutableArray *)data CollectionView:(UICollectionView *)collectionViewRef {
     [_desktopSocket makeRequest: @"list" data:data CollectionView:collectionViewRef];
+}
+
++ (void)setStreamPi:(NSString *)videoURL {
+    
+    NSString* url = [NSString stringWithFormat:@"remote/stream?i=%@", videoURL];
+    [_desktopSocket makeRequest:url];
+}
+
++ (void)togglePlayPi {
+    [_desktopSocket makeRequest:@"remote/playPause"];
+}
+
++ (void)stopPlayPi {
+    [_desktopSocket makeRequest:@"remote/stop"];
 }
 
 @end

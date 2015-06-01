@@ -8,13 +8,15 @@
 
 #import "CollectionViewController.h"
 #import "DetailsViewController.h"
+#import "NetworkRunner.h"
+#import "MovieData.h"
 
 @interface CollectionViewController()
 
 @end
 
 @implementation CollectionViewController {
-    NSMutableDictionary* _data;
+    NSMutableArray* _data;
 }
 
 - (void)viewDidLoad {
@@ -45,13 +47,11 @@
     [layout setHeaderReferenceSize:CGSizeMake(0.0f, 30.0f)];
     
     
-    _data = [[NSMutableDictionary alloc] init];
-    [_data setObject:@"test" forKey:@"1"];
-    [_data setObject:@"test2" forKey:@"2"];
+    _data = [[NSMutableArray alloc] init];
     
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
-   
     
+    [NetworkRunner loadVideoList:_data CollectionView:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +59,7 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [self.movieImages count];
+    return ceil(_data.count / 3.0);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -71,13 +71,16 @@
     
     cell.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *movieImageView = (UIImageView *)[cell viewWithTag:100];
+    int index = [indexPath indexAtPosition:0] * 3 + [indexPath indexAtPosition:1];
     
-    movieImageView.image = [UIImage imageNamed:[self.movieImages objectAtIndex:indexPath.row]];
-   
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pie.jpg"]];
-    [self.view addSubview:movieImageView];
-
+    if (index < _data.count) {
+        MovieData* md = _data[index];
+        
+        cell.backgroundView = [[UIImageView alloc] initWithImage:md.image];
+    }
+    else {
+        cell.backgroundColor = [UIColor blackColor];
+    }
     
     return cell;
 }

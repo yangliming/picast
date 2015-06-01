@@ -11,6 +11,7 @@
 #import "CollectionViewController.h"
 #import "NetworkRunner.h"
 #import "Utils.h"
+#import "MovieData.h"
 
 @interface ViewController ()
 
@@ -28,7 +29,6 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = self;
     
     dataSource = [[NSMutableArray alloc] init];
-    [dataSource addObject:@"192.168.137.221:8000"];
     
     [NetworkRunner setupListener:1234];
     [NetworkRunner loadServerList:dataSource TableView:tableViewRef];
@@ -42,7 +42,7 @@
     
     if (sender == testVideo) {
         AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.43.236:8000/out.m3u8"];
+        NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.137.156:8000/out.m3u8"];
         destination.player = [[AVPlayer alloc] initWithURL: url];
     }
 }
@@ -53,18 +53,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"cell"];
-    cell.textLabel.text = dataSource[[indexPath indexAtPosition: 1]];
+    cell.textLabel.text = dataSource[[indexPath indexAtPosition: 1]][0];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    [NetworkRunner setConnection:cell.textLabel.text];
+    NSString* ip = dataSource[[indexPath indexAtPosition: 1]][1];
+    [NetworkRunner setConnection:ip];
     
-    //UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
-    //CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
-    //[self presentViewController:cvc animated:YES completion:nil];
+    UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
+    CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
+    [self presentViewController:cvc animated:YES completion:nil];
 }
 
 - (UIViewController*)getViewController {

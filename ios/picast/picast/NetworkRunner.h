@@ -25,10 +25,15 @@
 // Retrieving Data
 + (void)loadVideoList:(NSMutableArray*)data CollectionView:(UICollectionView*)collectionViewRef;
 
-// Controls
+// Iphone Controls
 + (void)selectVideo:(NSString*)videoURL;
 + (void)playVideo;
 + (void)setStream;
+
+// Pi Controls
++ (void)setStreamPi:(NSString*)videoURL;
++ (void)togglePlayPi;
++ (void)stopPlayPi;
 
 @end
 
