@@ -12,10 +12,10 @@ module.exports = function FFmpeg()
             break
 
         case 'darwin':
-            this.path = '/usr/local/Cellar/ffmpeg/2.6.1/bin/ffmpeg';
+            this.path = '/usr/local/Cellar/ffmpeg/2.6.3/bin/ffmpeg';
             break;
 
-        default: 
+        default:
             this.path = "/usr/bin/ffmpeg";
     }
     this.proc = null;
@@ -29,27 +29,34 @@ module.exports = function FFmpeg()
         }
 
         fs.readdirSync(__dirname + "/stream").forEach(function(fileName) {
-            fs.unlinkSync(__dirname + "/stream/" + fileName);
+            if(fileName != ".gitignore"){
+                fs.unlinkSync(__dirname + "/stream/" + fileName);
+            }
         });
 
         var output = __dirname + "/stream/out.m3u8";
-        var args = ['-i', input, '-codec:v', 'libx264', '-crf', '22', '-threads', '0', '-codec:a', 'libfdk_aac', '-b:a', '128k', output];
+        var args = ['-i', input, '-hls_list_size', '0', '-hls_allow_cache', '1', '-codec:v', 'libx264', '-crf', '22', '-threads', '0', '-codec:a', 'libfdk_aac', '-b:a', '128k', output];
         console.log(this.path + " " + JSON.stringify(args));
 
-        var proc = spawn(this.path, args);
-        this.proc = proc;
+        this.proc = spawn(this.path, args);
         console.log(this.proc.pid);
 
-        proc.stdout.on('data', function(data) {
+        this.proc.stdout.on('data', function(data) {
             console.log(data.toString());
         });
 
-        proc.stderr.on('data', function(data) {
+        this.proc.stderr.on('data', function(data) {
             console.log(data.toString());
         });
 
-        proc.on('close', function (code) {
+        this.proc.on('close', function (code) {
             console.log('child process exited with code ' + code);
         });
-    }
+    };
+
+    this.stop = function() {
+        if(this.proc) {
+            this.proc.kill();
+        }
+    };
 }

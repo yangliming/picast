@@ -1,5 +1,6 @@
 body {
     background-color: #18191E;
+    padding-bottom: 70px;
 }
 
 #container: {
@@ -14,7 +15,102 @@ body {
 
 .poster:hover {
     cursor: pointer;
+    opacity: 0.4;
     border-style: solid;
     border-width: 1px;
     border-color: #4196E5;
 }
+
+.series {
+    width: 758px;
+    height: 140px;
+    margin-bottom: 10px;
+}
+
+.series:hover {
+    cursor: pointer;
+    opacity: 0.6;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4196E5;
+}
+
+.episode {
+    width: 400px;
+    height: 225px;
+    margin-bottom: 10px;
+}
+
+.episode:hover {
+    cursor: pointer;
+    opacity: 0.4;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4196E5;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.back-arrow:hover {
+    cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4196E5;
+}
+
+#logo {
+    margin-top: 0px;
+    color: white;
+}
+
+.nav-tabs {
+    border: 0px;
+}
+
+.nav-tabs > li > a:hover{
+    background-color: #303136 !important;
+    border: 0px;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
+    color: white;
+    background-color: #303136;
+    border: 0px;
+}
+
+#videos {
+    margin-top: 10px;
+}
+
+#bottom-nav {
+    background-color: #18191E;
+    border: 0px;
+}
+
+#controls-container {
+    text-align: center;
+}
+
+#controls-container i {
+    margin-top: 5px;
+    padding-right: 10px;
+    color: white;
+}
+
