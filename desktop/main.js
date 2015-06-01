@@ -9,7 +9,9 @@ var dialog = require('dialog');
 var chokidar = require('chokidar');
 var Menu = require('menu');
 var MenuItem = require('menu-item');
-
+var os = require('os');
+var FFmpeg = require('./ffmpeg.js')
+var ffmpeg = new FFmpeg();
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -202,6 +204,25 @@ http.createServer(function (req, res) {
         res.writeHead(200);
         res.end();
     }
+    else if(uri == "/remote/stream") {
+        var url_parts = url.parse(req.url, true);
+        var query = url_parts.query;
+        picast.startStream(query[i]);
+
+        console.log(JSON.stringify(query));
+        res.writeHead(200);
+        res.end();
+    }
+    else if(uri == "/remote/playPause") {
+        picast.playPauseStream();
+        res.writeHead(200);
+        res.end();
+    }
+    else if(uri == "/remote/stop") {
+        picast.stopStream();
+        res.writeHead(200);
+        res.end();
+    }
     else {
         var filename = __dirname + "/stream" + uri;
         fs.exists(filename, function (exists) {
@@ -262,28 +283,36 @@ var server = dgram.createSocket("udp4");
 server.on("message", function(msg, rinfo) {
     console.log("Server got: " + msg + " from " + rinfo.address + ":" + rinfo.port);
 
-    var response = "I'm right here!";
-    var client = net.connect(1234, rinfo.address, function() { //'connect' listener
-        console.log('Connected to pi!');
-        client.write('Sup pi');
-    });
+    msg_str = msg.toString();
+    msg_str = msg_str.replace(/\0/g, '');
 
-    client.on('close', function() {
-        console.log('Pi disconnect')
-        mainWindow.webContents.send('piDisconnect');
-    });
+    if(msg_str === "iphone") {
+        var response = os.hostname();
+        server.send(response, 0, response.length, 1234, rinfo.address);
+    }
+    else {
+        var client = net.connect(1234, rinfo.address, function() { //'connect' listener
+            console.log('Connected to pi!');
+            client.write('Sup pi');
+        });
 
-    dns.reverse(rinfo.address, function(err, domains) {
-        var hostname;
-        if(err) {
-            hostname = 'raspberrypi'
-        }
-        else {
-            hostname = domains[0];
-        }
-        picast.setPi(hostname, rinfo.address, client);
-        mainWindow.webContents.send('piHostname', picast.getPiHostname());
-    })
+        client.on('close', function() {
+            console.log('Pi disconnect')
+            mainWindow.webContents.send('piDisconnect');
+        });
+
+        dns.reverse(rinfo.address, function(err, domains) {
+            var hostname;
+            if(err) {
+                hostname = 'raspberrypi'
+            }
+            else {
+                hostname = domains[0];
+            }
+            picast.setPi(hostname, rinfo.address, client);
+            mainWindow.webContents.send('piHostname', picast.getPiHostname());
+        });
+    }
 
 
 });
