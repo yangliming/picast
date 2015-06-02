@@ -11,6 +11,7 @@
 #import "CollectionViewController.h"
 #import "NetworkRunner.h"
 #import "Utils.h"
+#import "MovieData.h"
 
 @interface ViewController ()
 
@@ -19,7 +20,6 @@
 @implementation ViewController {
     NSMutableArray* dataSource;
     __weak IBOutlet UITableView *tableViewRef;
-    __weak IBOutlet UIButton *testVideo;
 }
 
 - (void)viewDidLoad {
@@ -28,7 +28,9 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = self;
     
     dataSource = [[NSMutableArray alloc] init];
-    [dataSource addObject:@"192.168.137.221:8000"];
+    
+    //NSArray* db = [[NSArray alloc] initWithObjects: @"localhost", @"192.168.137.221:8000", nil];
+    //[dataSource addObject:db];
     
     [NetworkRunner setupListener:1234];
     [NetworkRunner loadServerList:dataSource TableView:tableViewRef];
@@ -38,29 +40,20 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if (sender == testVideo) {
-        AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.43.236:8000/out.m3u8"];
-        destination.player = [[AVPlayer alloc] initWithURL: url];
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"cell"];
-    cell.textLabel.text = dataSource[[indexPath indexAtPosition: 1]];
+    cell.textLabel.text = dataSource[[indexPath indexAtPosition: 1]][0];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    [NetworkRunner setConnection:cell.textLabel.text];
+    NSString* ip = dataSource[[indexPath indexAtPosition: 1]][1];
+    [NetworkRunner setConnection:ip];
     
     UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
     CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
@@ -71,22 +64,34 @@
     return self;
 }
 
-- (IBAction)broadcastClick:(id)sender {
-    [NetworkRunner broadcast];
-}
-
-- (IBAction)connectClick:(id)sender {
-    [NetworkRunner setConnection:nil];
-}
-
-- (IBAction)loadListClick:(id)sender {
-    [NetworkRunner loadVideoList:dataSource CollectionView:nil];
-}
-
-- (IBAction)setStreamClick:(id)sender {
-    [NetworkRunner setStream];
+- (IBAction)refreshClick:(id)sender {
+    [dataSource removeAllObjects];
+    [NetworkRunner loadServerList:dataSource TableView:tableViewRef];
 }
 
 
+/*
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ 
+ if (sender == testVideo) {
+ AVPlayerViewController* destination = (AVPlayerViewController*)segue.destinationViewController;
+ NSURL* url = [[NSURL alloc] initWithString: @"http://192.168.137.156:8000/out.m3u8"];
+ destination.player = [[AVPlayer alloc] initWithURL: url];
+ }
+ }
+ 
+ - (IBAction)connectClick:(id)sender {
+ [NetworkRunner setConnection:nil];
+ }
+ 
+ - (IBAction)loadListClick:(id)sender {
+ [NetworkRunner loadVideoList:dataSource CollectionView:nil];
+ }
+ 
+ - (IBAction)setStreamClick:(id)sender {
+ [NetworkRunner setStream];
+ }
+
+ */
 
 @end
