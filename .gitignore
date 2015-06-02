@@ -1,2 +1,4 @@
 desktop/data.json
 desktop/stream/*
+.DS_Store
+ios/picast/.DS_Store

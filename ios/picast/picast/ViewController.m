@@ -62,9 +62,9 @@
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [NetworkRunner setConnection:cell.textLabel.text];
     
-    //UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
-    //CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
-    //[self presentViewController:cvc animated:YES completion:nil];
+    UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
+    CollectionViewController* cvc = [[CollectionViewController alloc] initWithCollectionViewLayout:layout];
+    [self presentViewController:cvc animated:YES completion:nil];
 }
 
 - (UIViewController*)getViewController {

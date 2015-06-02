@@ -9,10 +9,25 @@
 #import "DetailsViewController.h"
 
 @interface DetailsViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *MovieTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *Image;
+@property (weak, nonatomic) IBOutlet UILabel *Released;
+@property (weak, nonatomic) IBOutlet UILabel *Genre;
+
+@property (weak, nonatomic) IBOutlet UILabel *IMDb;
+@property (weak, nonatomic) IBOutlet UILabel *Actors;
+
+@property (weak, nonatomic) IBOutlet UILabel *Director;
+
+@property (weak, nonatomic) IBOutlet UILabel *Synopsis;
 
 @end
 
 @implementation DetailsViewController
+- (IBAction)StreamToPhone:(id)sender {
+}
+- (IBAction)StreamOnPi:(id)sender {
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

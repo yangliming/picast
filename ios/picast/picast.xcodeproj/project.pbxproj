@@ -13,6 +13,14 @@
 		A5DD33501B1BB1A80031FB79 /* dumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5DD334D1B1BB1A80031FB79 /* dumb.jpg */; };
 		A5DD335B1B1BC9C70031FB79 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DD33591B1BC9C70031FB79 /* DetailsViewController.m */; };
 		A5DD335C1B1BC9C70031FB79 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DD335A1B1BC9C70031FB79 /* DetailsViewController.xib */; };
+		A5DD33711B1E23040031FB79 /* streamtophone_07.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD336F1B1E23040031FB79 /* streamtophone_07.png */; };
+		A5DD33721B1E23040031FB79 /* streamtopi_10.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD33701B1E23040031FB79 /* streamtopi_10.png */; };
+		A5DD33771B1E231A0031FB79 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD33731B1E231A0031FB79 /* Icon-60@2x.png */; };
+		A5DD33781B1E231A0031FB79 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD33741B1E231A0031FB79 /* Icon-60@3x.png */; };
+		A5DD33791B1E231A0031FB79 /* Icon-Spotlight-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD33751B1E231A0031FB79 /* Icon-Spotlight-40@2x.png */; };
+		A5DD337A1B1E231A0031FB79 /* Icon-Spotlight-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD33761B1E231A0031FB79 /* Icon-Spotlight-40@3x.png */; };
+		A5DD337C1B1E232A0031FB79 /* launchscreen-01.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD337B1B1E232A0031FB79 /* launchscreen-01.png */; };
+		A5DD337E1B1E34100031FB79 /* back_03.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DD337D1B1E34100031FB79 /* back_03.png */; };
 		F42D102D1B1B8A7B005F1F17 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D102C1B1B8A7B005F1F17 /* CollectionViewController.m */; };
 		F46D4A061B1BBC870093DBFD /* MovieData.m in Sources */ = {isa = PBXBuildFile; fileRef = F46D4A051B1BBC870093DBFD /* MovieData.m */; };
 		F470AADB1B006ECB001BEB87 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F470AADA1B006ECB001BEB87 /* AVKit.framework */; };
@@ -45,6 +53,14 @@
 		A5DD33581B1BC9C70031FB79 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = ../DetailsViewController.h; sourceTree = "<group>"; };
 		A5DD33591B1BC9C70031FB79 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = ../DetailsViewController.m; sourceTree = "<group>"; };
 		A5DD335A1B1BC9C70031FB79 /* DetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailsViewController.xib; path = ../DetailsViewController.xib; sourceTree = "<group>"; };
+		A5DD336F1B1E23040031FB79 /* streamtophone_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streamtophone_07.png; sourceTree = "<group>"; };
+		A5DD33701B1E23040031FB79 /* streamtopi_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streamtopi_10.png; sourceTree = "<group>"; };
+		A5DD33731B1E231A0031FB79 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		A5DD33741B1E231A0031FB79 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		A5DD33751B1E231A0031FB79 /* Icon-Spotlight-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@2x.png"; sourceTree = "<group>"; };
+		A5DD33761B1E231A0031FB79 /* Icon-Spotlight-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Spotlight-40@3x.png"; sourceTree = "<group>"; };
+		A5DD337B1B1E232A0031FB79 /* launchscreen-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchscreen-01.png"; sourceTree = "<group>"; };
+		A5DD337D1B1E34100031FB79 /* back_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_03.png; sourceTree = "<group>"; };
 		F42D102B1B1B8A7B005F1F17 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		F42D102C1B1B8A7B005F1F17 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		F46D4A041B1BBC870093DBFD /* MovieData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieData.h; sourceTree = "<group>"; };
@@ -138,6 +154,14 @@
 		F4C927CB1AF2C8DE007E130A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5DD337D1B1E34100031FB79 /* back_03.png */,
+				A5DD337B1B1E232A0031FB79 /* launchscreen-01.png */,
+				A5DD33731B1E231A0031FB79 /* Icon-60@2x.png */,
+				A5DD33751B1E231A0031FB79 /* Icon-Spotlight-40@2x.png */,
+				A5DD33741B1E231A0031FB79 /* Icon-60@3x.png */,
+				A5DD33761B1E231A0031FB79 /* Icon-Spotlight-40@3x.png */,
+				A5DD336F1B1E23040031FB79 /* streamtophone_07.png */,
+				A5DD33701B1E23040031FB79 /* streamtopi_10.png */,
 				A5DD334B1B1BB1A80031FB79 /* ashton.jpg */,
 				A5DD334C1B1BB1A80031FB79 /* avatar.jpg */,
 				A5DD334D1B1BB1A80031FB79 /* dumb.jpg */,
@@ -246,14 +270,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DD33781B1E231A0031FB79 /* Icon-60@3x.png in Resources */,
+				A5DD337E1B1E34100031FB79 /* back_03.png in Resources */,
+				A5DD337C1B1E232A0031FB79 /* launchscreen-01.png in Resources */,
+				A5DD337A1B1E231A0031FB79 /* Icon-Spotlight-40@3x.png in Resources */,
 				A5DD334E1B1BB1A80031FB79 /* ashton.jpg in Resources */,
 				A5DD334A1B1BAF7D0031FB79 /* pie.jpg in Resources */,
 				A5DD334F1B1BB1A80031FB79 /* avatar.jpg in Resources */,
+				A5DD33791B1E231A0031FB79 /* Icon-Spotlight-40@2x.png in Resources */,
 				F4C927D71AF2C8DE007E130A /* Main.storyboard in Resources */,
+				A5DD33771B1E231A0031FB79 /* Icon-60@2x.png in Resources */,
 				A5DD33501B1BB1A80031FB79 /* dumb.jpg in Resources */,
 				F4C927DC1AF2C8DE007E130A /* LaunchScreen.xib in Resources */,
+				A5DD33721B1E23040031FB79 /* streamtopi_10.png in Resources */,
 				F4C927D91AF2C8DE007E130A /* Images.xcassets in Resources */,
 				A5DD335C1B1BC9C70031FB79 /* DetailsViewController.xib in Resources */,
+				A5DD33711B1E23040031FB79 /* streamtophone_07.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
