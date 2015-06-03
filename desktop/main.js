@@ -291,15 +291,15 @@ server.on("message", function(msg, rinfo) {
         server.send(response, 0, response.length, 1234, rinfo.address);
     }
     else {
-        var client = net.connect(1234, rinfo.address, function() { //'connect' listener
-            console.log('Connected to pi!');
-            client.write('Sup pi');
-        });
+        // var client = net.connect(1234, rinfo.address, function() { //'connect' listener
+        //     console.log('Connected to pi!');
+        //     client.write('Connected to pi');
+        // });
 
-        client.on('close', function() {
-            console.log('Pi disconnect')
-            mainWindow.webContents.send('piDisconnect');
-        });
+        // client.on('close', function() {
+        //     console.log('Pi disconnect')
+        //     mainWindow.webContents.send('piDisconnect');
+        // });
 
         dns.reverse(rinfo.address, function(err, domains) {
             var hostname;
@@ -309,7 +309,8 @@ server.on("message", function(msg, rinfo) {
             else {
                 hostname = domains[0];
             }
-            picast.setPi(hostname, rinfo.address, client);
+            // picast.setPi(hostname, rinfo.address, client);
+            picast.setPi(hostname, rinfo.address, null);
             mainWindow.webContents.send('piHostname', picast.getPiHostname());
         });
     }
