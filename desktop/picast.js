@@ -5,7 +5,6 @@ var metafetch = require('./metafetch.js');
 var chokidar = require('chokidar');
 var FFmpeg = require('./ffmpeg.js')
 var ffmpeg = new FFmpeg();
-var request = require('request');
 
 module.exports = function Picast()
 {
@@ -169,40 +168,25 @@ module.exports = function Picast()
     };
 
     this.startStream = function(path) {
-        // if(_piSocket) {
-        //     ffmpeg.createHLS(path);
-        //     setTimeout(function() {
-        //         _piSocket.write('start');
-        //     }, 10000);
-        // }
-        request('http://' + _piAddress + ':8080/start', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body) // Show the HTML for the Google homepage.
-            }
-        });
+        if(_piSocket) {
+            ffmpeg.createHLS(path);
+            setTimeout(function() {
+                _piSocket.write('start');
+            }, 5000);
+        }
     };
 
     this.playPauseStream = function() {
-        // if(_piSocket) {
-        //     _piSocket.write('playPause');
-        // }
-        request('http://' + _piAddress + ':8080/playPause', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body) // Show the HTML for the Google homepage.
-            }
-        });
+        if(_piSocket) {
+            _piSocket.write('playPause');
+        }
     };
 
     this.stopStream = function() {
-        // if(_piSocket) {
-        //     _piSocket.write('stop');
-        //     ffmpeg.stop();
-        // }
-        request('http://' + _piAddress + ':8080/stop', function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(body) // Show the HTML for the Google homepage.
-            }
-        });
+        if(_piSocket) {
+            _piSocket.write('stop');
+            ffmpeg.stop();
+        }
     };
 
     this.getVideoInfo = function(path) {
